@@ -1,8 +1,14 @@
-angular.module('starter.controllers', [])
+// var Beacon = angular.module('Beacon.controllers', []);
+var Beacon = angular.module('Beacon.controllers', ['ng-token-auth']);
+Beacon.config(function($authProvider) {
+  $authProvider.configure({
+            apiUrl: 'http://localhost:3000' //your api's url
+          });
+});
 
-.controller('ProfileCtrl', function($scope) {})
+Beacon.controller('ProfileCtrl', function($scope) {})
 
-.controller('CreateCtrl', function($scope, Chats) {
+Beacon.controller('CreateCtrl', function($scope, Chats) {
   $scope.chats = Chats.all();
   $scope.remove = function(chat) {
     Chats.remove(chat);
@@ -10,7 +16,7 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('TrendingCtrl', function($scope, Friends) {
+Beacon.controller('TrendingCtrl', function($scope, Friends) {
   $scope.friends = Friends.all();
 })
 
@@ -18,10 +24,51 @@ angular.module('starter.controllers', [])
 //   $scope.friend = Friends.get($stateParams.friendId);
 // })
 
-.controller('HomeCtrl', function($scope) {
+Beacon.controller('HomeCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true
   };
+});
+
+
+
+Beacon.controller('registerCtrl', function ($scope, $http, $auth) {
+
+
+  //OAUTH SIGN IN
+  $scope.handleBtnClick = function() {
+    $auth.authenticate('facebook')
+    .then(function(resp) {
+      alert('something successful happened')
+    })
+    .catch(function(resp) {
+        // handle errors
+        alert('something terrible happened')
+      });
+  };
+
+  //OAUTH SIGN OUT
+  $scope.handleSignOutBtnClick = function() {
+      $auth.signOut()
+        .then(function(resp) {
+          // handle success response
+        })
+        .catch(function(resp) {
+          // handle error response
+        });
+    };
+
+});
+
+Beacon.controller('MapController', function() {
+    var map = new GMaps({
+      el: '#map',
+      lat: -12.043333,
+      lng: -77.028333
+})
+
+        // $scope.map = map;
+
 });
 
 // Nested Friend view
