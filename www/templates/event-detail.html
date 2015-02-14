@@ -4,5 +4,20 @@
     <p>
       {{event.description}}
     </p>
+    <form novalidate class='create-form'>
+        <label class="checkbox">
+        <input type='checkbox' name='event.adult'/>Count me In!
+        </label>
+        <label class="checkbox">
+        <input type='checkbox' name='event.private'/>Can I come?
+        </label>
+      </form>
+      <!-- List of Users attending event -->
+      <ion-list ng-controller="EventsCtrl">
+      <ion-item class="item-avatar" ng-repeat="event in events" type="item-text-wrap" href="#/event-detail/{{event.id}}">
+        <img ng-src="{{event.picture}}">
+        <h2>{{event.name}}</h2>
+      </ion-item>
+    </ion-list>
   </ion-content>
 </ion-view>
