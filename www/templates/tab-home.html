@@ -12,17 +12,14 @@
       </ion-item>
     </ion-list>
   </ion-content> -->
-  <ion-content ng-controller='registerCtrl'>
+  <ion-content has-bouncing='false' ng-controller='registerCtrl'>
 
   <h1>Hello!</h1>
-  <button ng-click="authenticate('facebook')">Sign In</button> <!-- replace 'google' with your authentication choice see: https://github.com/lynndylanhurley/ng-token-auth#oauth2-authentication-flow -->
-  <button ng-click='signOut()'>Sign Out</button>
+    <button ng-click="authenticate('facebook')">Sign In</button> <!-- replace 'google' with your authentication choice see: https://github.com/lynndylanhurley/ng-token-auth#oauth2-authentication-flow -->
+    <button ng-click='signOut()'>Sign Out</button>
+    <div ng-controller="MapController" id="map" data-tap-disabled="true"></div>
 
-</ion-content>
-
-<ion-content ng-controller="MapController">
-    <div id="map" data-tap-disabled="true"></div>
-</ion-content>
+  </ion-content>
 
 
 </ion-view>
