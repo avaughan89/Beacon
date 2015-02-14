@@ -47,6 +47,11 @@ angular.module('Beacon', ['ionic', 'Beacon.controllers', 'Beacon.services'])
       }
     }
   })
+  .state('event-detail', {
+      url: '/event-detail/:eventId',
+     templateUrl: 'templates/event-detail.html',
+      controller: 'EventDetailCtrl'
+    })
 
   .state('tab.create', {
       url: '/create',
@@ -95,6 +100,8 @@ angular.module('Beacon', ['ionic', 'Beacon.controllers', 'Beacon.services'])
       }
     }
   });
+
+
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/home');

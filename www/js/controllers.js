@@ -72,6 +72,18 @@ Beacon.controller('MapController', function() {
 
 });
 
+Beacon.controller('EventsCtrl', function($scope, Events) {
+  $scope.events = Events.all();
+  $scope.remove = function(event) {
+    Events.remove(event);
+  }
+})
+
+Beacon.controller('EventDetailCtrl', function($scope, $stateParams, Events) {
+  $scope.event = Events.get($stateParams.eventId);
+})
+
+
 // Nested Friend view
 // .controller('FriendsCtrl', function($scope, Friends) {
 //   $scope.friends = Friends.all();
