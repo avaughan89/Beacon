@@ -1,27 +1,28 @@
 <ion-view view-title="Profile">
   <ion-content class="padding" >
-  <div>
-    <img src="http://i.imgur.com/atz81.jpg" class='profile-pic'>
+  <div class='list'>
+      <a class='item item-thumbnail-left'>
+        <img  src="http://i.imgur.com/atz81.jpg">
+        <h2>{{user.name}}First Name</h2>
+        <h2>{{user.name}}Last Name</h2>
+        <h2>{{user.name}}Location</h2>
+        </a>
   </div>
   <div>
-    <ul>
-      <li>My NAme IS Andrew</li>
-      <li>My NAme IS Andrew</li>
-      <li>My NAme IS Andrew</li>
-    </ul>
-  </div>
-  <div>
-    Host Rating:
+     <span class='input-label'>Host Rating:</span>
     <progress class='host-rating' value='75' max='100'></progress>
-    Guest Rating:
+    <span class='input-label'>Guest Rating:</span>
     <progress class='guest-rating' value='45' max='100'></progress>
   </div>
 
   <div class='upcoming' >
     <h3>Upcoming Events</h3>
-    <ul  ng-controller="EventsCtrl">
-      <li ng-repeat="event in events" ng-controller="EventsCtrl"><a href="#/event-detail/{{event.id}}">{{event.name}}</a></li>
-    </ul>
+    <ion-list ng-controller="EventsCtrl">
+      <ion-item class="item-avatar" ng-repeat="event in events" type="item-text-wrap" href="#/event-detail/{{event.id}}">
+        <img ng-src="{{event.picture}}">
+        <h2>{{event.name}}</h2>
+      </ion-item>
+    </ion-list>
   </div>
 
   </ion-content>

@@ -6,27 +6,27 @@ angular.module('Beacon.services', [])
   // Some fake testing data
   var events = [{
     id: 0,
-    name: 'Ben Sparrow',
+    name: 'Flag Football',
     description: 'You on your way?',
     picture: 'https://pbs.twimg.com/profile_images/514549811765211136/9SgAuHeY.png'
   }, {
     id: 1,
-    name: 'Max Lynx',
+    name: 'Turn Up',
     description: 'Hey, it\'s me',
     picture: 'https://avatars3.githubusercontent.com/u/11214?v=3&s=460'
   }, {
     id: 2,
-    name: 'Andrew Jostlin',
+    name: 'Turn Down',
     description: 'Did you get the ice cream?',
     picture: 'https://pbs.twimg.com/profile_images/491274378181488640/Tti0fFVJ.jpeg'
   }, {
     id: 3,
-    name: 'Adam Bradleyson',
+    name: 'Smash Bros Tourny',
     description: 'I should buy a boat',
     picture: 'https://pbs.twimg.com/profile_images/479090794058379264/84TKj_qa.jpeg'
   }, {
     id: 4,
-    name: 'Perry Governor',
+    name: 'League of Legends Watch Party',
     description: 'Look at my mukluks!',
     picture: 'https://pbs.twimg.com/profile_images/491995398135767040/ie2Z_V6e.jpeg'
   }];
