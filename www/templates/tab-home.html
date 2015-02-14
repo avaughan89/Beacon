@@ -1,0 +1,25 @@
+<ion-view view-title="Home">
+  <!-- <ion-content>
+    <ion-list>
+      <ion-item class="item-toggle">
+        Register for Beacon Access
+        <label class="toggle">
+          <input type="checkbox" ng-model="settings.enableFriends">
+          <div class="track">
+            <div class="handle"></div>
+          </div>
+        </label>
+      </ion-item>
+    </ion-list>
+  </ion-content> -->
+  <ion-content has-bouncing='false' ng-controller='registerCtrl'>
+
+  <h1>Hello!</h1>
+    <button ng-click="authenticate('facebook')">Sign In</button> <!-- replace 'google' with your authentication choice see: https://github.com/lynndylanhurley/ng-token-auth#oauth2-authentication-flow -->
+    <button ng-click='signOut()'>Sign Out</button>
+    <div ng-controller="MapController" id="map" data-tap-disabled="true"></div>
+
+  </ion-content>
+
+
+</ion-view>

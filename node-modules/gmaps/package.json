@@ -1,0 +1,50 @@
+{
+  "name": "gmaps",
+  "version": "0.4.12",
+  "description": "the easiest way to use Google Maps",
+  "main": "gmaps.js",
+  "scripts": {
+    "test": "grunt test --verbose"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HPNeo/gmaps"
+  },
+  "author": {
+    "name": "Gustavo Leon"
+  },
+  "homepage": "http://hpneo.github.com/gmaps/",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/HPNeo/gmaps/issues"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-jasmine": "~0.5.1",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-umd": "~1.3.0"
+  },
+  "_id": "gmaps@0.4.12",
+  "dist": {
+    "shasum": "d7ebfa321c2a5f58a515151f3d7685b3615f2b6f",
+    "tarball": "http://registry.npmjs.org/gmaps/-/gmaps-0.4.12.tgz"
+  },
+  "_from": "gmaps@*",
+  "_npmVersion": "1.4.3",
+  "_npmUser": {
+    "name": "cwmma",
+    "email": "calvin.metcalf@gmail.com"
+  },
+  "maintainers": [
+    {
+      "name": "cwmma",
+      "email": "calvin.metcalf@gmail.com"
+    }
+  ],
+  "directories": {},
+  "_shasum": "d7ebfa321c2a5f58a515151f3d7685b3615f2b6f",
+  "_resolved": "https://registry.npmjs.org/gmaps/-/gmaps-0.4.12.tgz",
+  "readme": "ERROR: No README data found!"
+}
