@@ -8,11 +8,11 @@ Beacon.config(function($authProvider) {
 
 Beacon.controller('ProfileCtrl', function($scope) {})
 
-Beacon.controller('CreateCtrl', function($scope, Chats) {
-  $scope.chats = Chats.all();
-  $scope.remove = function(chat) {
-    Chats.remove(chat);
-  }
+Beacon.controller('CreateCtrl', function($scope) {
+  // $scope.chats = Chats.all();
+  // $scope.remove = function(chat) {
+  //   Chats.remove(chat);
+
 })
 
 

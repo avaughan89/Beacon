@@ -48,10 +48,10 @@ angular.module('Beacon', ['ionic', 'Beacon.controllers', 'Beacon.services'])
     }
   })
   .state('event-detail', {
-      url: '/event-detail/:eventId',
-     templateUrl: 'templates/event-detail.html',
-      controller: 'EventDetailCtrl'
-    })
+    url: '/event-detail/:eventId',
+    templateUrl: 'templates/event-detail.html',
+    controller: 'EventDetailCtrl'
+  })
 
   .state('tab.create', {
       url: '/create',
