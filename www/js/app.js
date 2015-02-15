@@ -41,6 +41,15 @@ angular.module('Beacon', [
   })
 
   // Each tab has its own nav history stack:
+  .state('tab.home', {
+    url: '/home',
+    views: {
+      'tab-home': {
+        templateUrl: 'templates/tab-home.html',
+        controller: 'HomeCtrl'
+      }
+    }
+  })
 
   .state('tab.profile', {
     url: '/profile',
@@ -49,10 +58,6 @@ angular.module('Beacon', [
         templateUrl: 'templates/tab-profile.html',
         controller: 'ProfileCtrl'
       }
-      // 'event-detail': {
-      //   templateUrl: 'templates/event-detail.html',
-      //   controller: 'EventDetailCtrl'
-      // }
     }
   })
   .state('tab.event-detail', {
@@ -74,15 +79,7 @@ angular.module('Beacon', [
         }
       }
     })
-    // .state('tab.chat-detail', {
-    //   url: '/chats/:chatId',
-    //   views: {
-    //     'tab-chats': {
-    //       templateUrl: 'templates/chat-detail.html',
-    //       controller: 'ChatDetailCtrl'
-    //     }
-    //   }
-    // })
+
 
   .state('tab.trending', {
       url: '/trending',
@@ -93,27 +90,6 @@ angular.module('Beacon', [
         }
       }
     })
-    // .state('tab.friend-detail', {
-    //   url: '/friend/:friendId',
-    //   views: {
-    //     'tab-friends': {
-    //       templateUrl: 'templates/friend-detail.html',
-    //       controller: 'FriendDetailCtrl'
-    //     }
-    //   }
-    // })
-
-  .state('tab.home', {
-    url: '/home',
-    views: {
-      'tab-home': {
-        templateUrl: 'templates/tab-home.html',
-        controller: 'HomeCtrl'
-      }
-    }
-  });
-
-
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/home');
