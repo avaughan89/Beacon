@@ -3,18 +3,17 @@
 
     <div class='list'>
       <a class='item item-thumbnail-left'>
-        <img  src="http://i.imgur.com/atz81.jpg">
-        <h2>{{user.name}}First Name</h2>
-        <h2>{{user.name}}Last Name</h2>
-        <h2>{{user.name}}Location</h2>
+        <img  src="{{user.image}}">
+        <h2>{{user.name}}</h2>
+        <h2>{{user.location}}</h2>
       </a>
     </div>
 
     <div>
-      <span class='input-label'>Host Rating:</span>
-      <progress class='host-rating' value='75' max='100'></progress>
-      <span class='input-label'>Guest Rating:</span>
-      <progress class='guest-rating' value='45' max='100'></progress>
+      <span class='input-label'>Host Rating Count: {{user.host_rating_count}}</span>
+      <progress class='host-rating' value='{{user.host_rating}}' max='100'></progress>
+      <span class='input-label'>Guest Rating Count: {{user.attendee_rating_count}}</span>
+      <progress class='guest-rating' value='{{user.attendee_rating}}' max='100'></progress>
     </div>
 
     <div class='upcoming' >
