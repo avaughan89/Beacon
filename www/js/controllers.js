@@ -1,28 +1,12 @@
 // var Beacon = angular.module('Beacon.controllers', []);
 var Beacon = angular.module('Beacon.controllers', ['ng-token-auth']);
+// Auth Configuration
 Beacon.config(function($authProvider) {
   $authProvider.configure({
             apiUrl: 'http://localhost:3000' //your api's url
           });
 });
 
-Beacon.controller('ProfileCtrl', function($scope) {})
-
-Beacon.controller('CreateCtrl', function($scope) {
-  // $scope.chats = Chats.all();
-  // $scope.remove = function(chat) {
-  //   Chats.remove(chat);
-
-})
-
-
-Beacon.controller('TrendingCtrl', function($scope, Friends) {
-  $scope.friends = Friends.all();
-})
-
-// .controller('FriendDetailCtrl', function($scope, $stateParams, Friends) {
-//   $scope.friend = Friends.get($stateParams.friendId);
-// })
 
 Beacon.controller('HomeCtrl', function($scope) {
   $scope.settings = {
@@ -30,7 +14,47 @@ Beacon.controller('HomeCtrl', function($scope) {
   };
 });
 
+Beacon.controller('MapController', function($scope, map) {
+    $scope.map = map;
+    GMaps.geolocate({
+      success: function(position) {
+        map.setCenter(position.coords.latitude, position.coords.longitude),
+        map.addMarker({
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+          title: "You are here!",
+          infoWindow: {
+                content: "<p>Let's do some exploring!</p>"
+            }
+        })
+      },
+      error: function(error) {
+        alert('Geolocation failed' + error.message);
+      },
+      not_supported: function() {
+        alert('Your browser does not support Geolocation')
+      }
+    })
+});
 
+
+Beacon.controller('ProfileCtrl', function($scope) {});
+
+Beacon.controller('CreateCtrl',['$scope', '$http', function($scope,$http){}]);
+
+Beacon.controller('EventsCtrl', function($scope, Events) {
+  $scope.events = Events.all();
+  $scope.remove = function(event) {
+    Events.remove(event);
+  }
+});
+
+Beacon.controller('EventDetailCtrl', function() {
+  // $scope.event = Events.get($stateParams.eventId);
+});
+
+
+Beacon.controller('TrendingCtrl', function($scope) {});
 
 Beacon.controller('registerCtrl', function ($scope, $http, $auth) {
 
@@ -60,39 +84,8 @@ Beacon.controller('registerCtrl', function ($scope, $http, $auth) {
 
 });
 
-Beacon.controller('MapController', function() {
-    var map = new GMaps({
-      el: '#map',
-      lat: -12.043333,
-      lng: -77.028333,
-      draggable: false
-})
-    GMaps.geolocate({
-      success: function(position) {
-        map.setCenter(position.coords.latitude, position.coords.longitude);
-      },
-      error: function(error) {
-        alert('Geolocation failed' + error.message);
-      },
-      not_supported: function() {
-        alert('Your browser does not support Geolocation')
-      }
-    })
 
-        // $scope.map = map;
 
-});
-
-Beacon.controller('EventsCtrl', function($scope, Events) {
-  $scope.events = Events.all();
-  $scope.remove = function(event) {
-    Events.remove(event);
-  }
-})
-
-Beacon.controller('EventDetailCtrl', function($scope, $stateParams, Events) {
-  $scope.event = Events.get($stateParams.eventId);
-})
 
 
 // Nested Friend view

@@ -5,7 +5,11 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('Beacon', ['ionic', 'Beacon.controllers', 'Beacon.services'])
+angular.module('Beacon', [
+  'ionic',
+  'Beacon.controllers',
+  'Beacon.services'
+  ])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -45,12 +49,20 @@ angular.module('Beacon', ['ionic', 'Beacon.controllers', 'Beacon.services'])
         templateUrl: 'templates/tab-profile.html',
         controller: 'ProfileCtrl'
       }
+      // 'event-detail': {
+      //   templateUrl: 'templates/event-detail.html',
+      //   controller: 'EventDetailCtrl'
+      // }
     }
   })
-  .state('event-detail', {
-    url: '/event-detail/:eventId',
-    templateUrl: 'templates/event-detail.html',
-    controller: 'EventDetailCtrl'
+  .state('tab.event-detail', {
+    url: '/event-detail',
+    views: {
+      "tab-profile": {
+        templateUrl: 'templates/event-detail.html',
+        controller: 'EventDetailCtrl'
+      }
+    }
   })
 
   .state('tab.create', {

@@ -18,12 +18,13 @@
   <div class='upcoming' >
     <h3>Upcoming Events</h3>
     <ion-list ng-controller="EventsCtrl">
-      <ion-item class="item-avatar" ng-repeat="event in events" type="item-text-wrap" href="#/event-detail/{{event.id}}">
+      <ion-item class="item-avatar" ng-repeat="event in events" type="item-text-wrap" ui-sref="tab.event-detail">
         <img ng-src="{{event.picture}}">
         <h2>{{event.name}}</h2>
       </ion-item>
     </ion-list>
   </div>
+
 
   </ion-content>
 </ion-view>
