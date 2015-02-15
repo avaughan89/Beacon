@@ -55,6 +55,9 @@ Beacon.controller('EventDetailCtrl', function() {
 Beacon.controller('TrendingCtrl', function($scope) {});
 
 Beacon.controller('registerCtrl', function ($scope, $http, $auth) {
+  $scope.isSignedIn = function() {
+    console.log("Hello")
+  };
 
 
   //OAUTH SIGN IN
