@@ -24,22 +24,23 @@ angular.module('Beacon.services', [])
 })
 
 
-.factory('Events', function($http, $q){
+.factory('Events', function($http, $q, ajaxFactory){
    // return events = ajaxFactory.request("http://localhost:3000/users/1", 'get')
    return {
     getEvents: function(){
-      return $http.get("http://localhost:3000/users/1")
-      .then(function(response){
-        if (typeof response.data === 'object') {
-          return response.data;
-        } else {
-          return $q.reject(response.data);
-        }
+      return ajaxFactory.request("http://localhost:3000/users/1", 'get')
+      // $http.get("http://localhost:3000/users/1")
+      // .then(function(response){
+      //   if (typeof response.data === 'object') {
+      //     return response.data;
+      //   } else {
+      //     return $q.reject(response.data);
+      //   }
 
-      }, function(response) {
+      // }, function(response) {
 
-        return $q.reject(response.data);
-      });
+      //   return $q.reject(response.data);
+      // });
     }
    };
 });
