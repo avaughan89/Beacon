@@ -8,7 +8,8 @@
 angular.module('Beacon', [
   'ionic',
   'Beacon.controllers',
-  'Beacon.services'
+  'Beacon.services',
+  'Beacon.factories'
   ])
 
 .run(function($ionicPlatform) {
