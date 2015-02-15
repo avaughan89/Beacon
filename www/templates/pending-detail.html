@@ -1,0 +1,10 @@
+<ion-view view-title="Pending Invites">
+  <ion-content ng-controller="PendingCtrl">
+    <ion-list>
+      <ion-item class="item-avatar" ng-repeat="event in events" type="item-text-wrap" href="#/event-detail/{{event.id}}">
+        <img ng-src="{{event.picture}}">
+        <h2>{{event.name}}</h2>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
