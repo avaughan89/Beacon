@@ -38,11 +38,14 @@ Beacon.controller('ProfileCtrl', function($scope) {});
 
 Beacon.controller('CreateCtrl',['$scope', '$http', function($scope,$http){}]);
 
-Beacon.controller('EventsCtrl', function($scope, Events) {
-  $scope.events = Events.all();
-  $scope.remove = function(event) {
-    Events.remove(event);
-  }
+Beacon.controller('EventsCtrl', function($scope, Events, $q, $http) {
+    Events.getEvents()
+    .then(function(data){
+      console.log(data);
+      $scope.events = data.upcoming_events
+    })
+
+
 });
 
 Beacon.controller('EventDetailCtrl', function() {
