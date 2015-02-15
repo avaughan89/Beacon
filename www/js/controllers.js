@@ -1,4 +1,3 @@
-// var Beacon = angular.module('Beacon.controllers', []);
 var Beacon = angular.module('Beacon.controllers', ['ng-token-auth']);
 // Auth Configuration
 Beacon.config(function($authProvider) {
@@ -9,9 +8,6 @@ Beacon.config(function($authProvider) {
 
 
 Beacon.controller('HomeCtrl', function($scope) {
-  $scope.settings = {
-    enableFriends: true
-  };
 });
 
 Beacon.controller('MapController', function($scope, map) {
