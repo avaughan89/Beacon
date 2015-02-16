@@ -12,36 +12,13 @@ angular.module('Beacon.services', [])
   return map;
 })
 
-// .factory('locationService', function(event){
-//       GMaps.geocode({
-//       address: event.location,
-//       callback: function(results){
-//         var latlng = results[0].geometry.location;
-//         console.log(latlng)
-//         // event.address = latlng
-//         // console.log(event.address)
-//       }
-//     })
-// })
-
-
 .factory('Events', function($http, $q, ajaxFactory){
-   // return events = ajaxFactory.request("http://localhost:3000/users/1", 'get')
    return {
     getEvents: function(){
       return ajaxFactory.request("http://localhost:3000/events", 'get')
-      // $http.get("http://localhost:3000/users/1")
-      // .then(function(response){
-      //   if (typeof response.data === 'object') {
-      //     return response.data;
-      //   } else {
-      //     return $q.reject(response.data);
-      //   }
-
-      // }, function(response) {
-
-      //   return $q.reject(response.data);
-      // });
+    },
+    createEvents: function(data){
+      return ajaxFactory.request("http://localhost:3000/events", "post",  data)
     }
    };
 });
