@@ -8,10 +8,11 @@ Beacon.controller('MapController', function($scope, map, Events, $http, $q) {
   $scope.map = map;
   Events.getEvents()
   .then(function(data){
-    var j = data.length;
-    for (var i = 0; i < j; i+=1) {
-      (function(cntr){GMaps.geocode({
-        address: data[cntr].location,
+    var i;
+    var j = data;
+    var markerMarker = function(data) {
+        GMaps.geocode({
+        address: data.location,
         callback: function(results, status){
           if (status == "OK") {
             var latlng = results[0].geometry.location;
@@ -20,29 +21,25 @@ Beacon.controller('MapController', function($scope, map, Events, $http, $q) {
               lng: latlng.D,
               infoWindow: {
                 content:
-                "<h5>"+ data[cntr].title + "</h5>" + "<p>" + data[cntr].description + "</p>" + "<p>" + data[cntr].date_start + "</p>"
+                "<h5>"+ data.title + "</h5>" + "<p>" + data.description + "</p>" + "<p>" + data.date_start + "</p>"
               }
             })
-          }
+          } else {
+            console.log("error", data)
+          };
         }
 
-      })})(i);
+      })
+}
+    for (var i = 0; i < j.length; i+=1) {
+    markerMarker(data[i])
     }
-
   })
 
 
   GMaps.geolocate({
     success: function(position) {
       map.setCenter(position.coords.latitude, position.coords.longitude)
-      // map.addMarker({
-      //   lat: position.coords.latitude,
-      //   lng: position.coords.longitude,
-      //   title: "You are here!",
-      //   infoWindow: {
-      //     content: "<p>Let's do some exploring!</p>"
-      //   }
-      // })
     },
     error: function(error) {
       alert('Geolocation failed' + error.message);
@@ -53,8 +50,6 @@ Beacon.controller('MapController', function($scope, map, Events, $http, $q) {
 
   })
 
-
-
 });
 
 
@@ -62,7 +57,6 @@ Beacon.controller('MapController', function($scope, map, Events, $http, $q) {
 
 Beacon.controller('CreateCtrl', function($scope,$http, Events, $q){
   $scope.update = function(event) {
-    debugger;
     Events.createEvents(event);
 
   }
