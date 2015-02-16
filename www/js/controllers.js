@@ -6,6 +6,19 @@ Beacon.controller('HomeCtrl', function($scope) {
 
 Beacon.controller('MapController', function($scope, map, Events, $http, $q) {
   $scope.map = map;
+
+var image = {
+    url: 'http://plebeosaur.us/etc/map/bluedot_retina.png',
+    // This marker is 20 pixels wide by 32 pixels tall.
+    size: new google.maps.Size(32, 32),
+    // The origin for this image is 0,0.
+    origin: new google.maps.Point(0,0),
+    // The anchor for this image is the base of the flagpole at 0,32.
+    anchor: new google.maps.Point(15, 15)
+  };
+
+
+
   Events.getEvents()
   .then(function(data){
     var i;
@@ -41,12 +54,18 @@ Beacon.controller('MapController', function($scope, map, Events, $http, $q) {
             map.drawCircle({
               center: latlng,
               radius: (data.people_count * 5),
-              fillColor: color,
-              infoWindow: {
+              fillColor: color
+            }),
+
+            map.addMarker({
+                lat: latlng.k,
+                lng: latlng.D,
+                icon: image,
+                infoWindow: {
                 content:
                 "<h5>"+ data.title + "</h5>" + "<p>" + data.description + "</p>" + "<p>" + data.date_start + "</p>"
               }
-            })
+              })
           } else {
             console.log("error", data)
           };
