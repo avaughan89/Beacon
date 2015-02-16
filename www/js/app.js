@@ -33,7 +33,12 @@ angular.module('Beacon', [
       'tab-home': {
         templateUrl: 'templates/tab-home.html',
         controller: 'HomeCtrl'
-      }
+      },
+     resolve: {
+      events: function($scope){
+        $scope.events
+     }
+   }
     }
   })
 

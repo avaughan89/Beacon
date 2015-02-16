@@ -4,24 +4,25 @@ angular.module('Beacon.services', [])
 .factory('map', function(){
   var map = new GMaps({
       el: '#map',
-      lat: -12.043333,
-      lng: -77.028333,
-      draggable: false
+      lat: 37.778197,
+      lng: -122.432040,
+      zoom: 10
+      // draggable: false
   })
   return map;
 })
 
-.factory('locationService', function(event){
-      GMaps.geocode({
-      address: event.location,
-      callback: function(results){
-        var latlng = results[0].geometry.location;
-        console.log(latlng)
-        // event.address = latlng
-        // console.log(event.address)
-      }
-    })
-})
+// .factory('locationService', function(event){
+//       GMaps.geocode({
+//       address: event.location,
+//       callback: function(results){
+//         var latlng = results[0].geometry.location;
+//         console.log(latlng)
+//         // event.address = latlng
+//         // console.log(event.address)
+//       }
+//     })
+// })
 
 
 .factory('Events', function($http, $q, ajaxFactory){
