@@ -21,37 +21,29 @@ Beacon.controller('MapController', function($scope, map, Events, $http, $q) {
   $scope.map = map;
   Events.getEvents()
   .then(function(data){
-    console.log(data);
-    console.log(data.length);
-    var length = data.length -1;
-    for (var i = 0; i < length; i+=1) {
-      console.log(i);
-      GMaps.geocode({
-        address: data[i].location,
+    var j = data.length;
+    for (var i = 0; i < j; i+=1) {
+      (function(cntr){GMaps.geocode({
+        address: data[cntr].location,
         callback: function(results, status){
           if (status == "OK") {
             var latlng = results[0].geometry.location;
-              console.log(latlng.k);
-              console.log(latlng.D);
-              console.log(data);
-                // data = data[i];
-            // console.log(latlng);
             map.addMarker({
               lat: latlng.k,
               lng: latlng.D,
               infoWindow: {
                 content:
-                "<h5>"+ data[i].title + "</h5>" + "<p>" + data[i].description + "</p>" + "<p>" + data[i].date_start + "</p>"
+                "<h5>"+ data[cntr].title + "</h5>" + "<p>" + data[cntr].description + "</p>" + "<p>" + data[cntr].date_start + "</p>"
               }
             })
           }
-          }
+        }
 
-        })
+      })})(i);
     }
 
   })
-    // console.log(data);
+
 
     GMaps.geolocate({
       success: function(position) {
