@@ -15,11 +15,12 @@
           <div class='input-label'>Category</div>
           <select name='event.category'>
             <option value='sports'>Sports</option>
-            <option value='entertainment'>Ent</option>
-            <option value='leisure'>Leisure</option>
-            <option value='creative'>Creative</option>
+            <option value='entertainment'>Entertainment</option>
+            <option value='social'>Social</option>
             <option value='misc'>Misc</option>
-            <option value='other'>Other</option>
+            <option value='video_games'>Video Games</option>
+            <option value='food'>Food</option>
+            <option value='outdoors'>Outdoors</option>
           </select>
         </label>
         <label class="item item-input item-stacked-label">
@@ -27,11 +28,15 @@
           <input type='text' ng-model='event.address' placeholder='Address'/>
         </label>
         <label class="item item-input item-stacked-label">
-          <span class='input-label'>Date</span>
-          <input type='date' ng-model='event.date'/>
+          <span class='input-label'>Date/Time Start</span>
+          <input type='datetime-local' ng-model='event.date_start'/>
+        </label>
+        <label class="item item-input item-stacked-label">
+          <span class='input-label'>Date/Time End</span>
+          <input type='datetime-local' ng-model='event.date_end'/>
         </label>
 
-        <ul class='list'>
+        <!-- <ul class='list'>
           <li class="item item-checkbox">
             <label class="checkbox">
               <input type='checkbox' name='event.adult' ng-model="event.adult"/>
@@ -42,7 +47,7 @@
             </label>
             Private?
           </li>
-        </ul>
+        </ul> -->
         <button class='button button-full button-balanced' ng-click="update(event)"/>
           Create Event
         </button>
