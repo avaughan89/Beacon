@@ -11,14 +11,37 @@ Beacon.controller('MapController', function($scope, map, Events, $http, $q) {
     var i;
     var j = data;
     var markerMarker = function(data) {
+        switch (data.category){
+          case "Sports":
+          var color = "red"
+          case "Entertainment":
+             var color = "blue"
+             break;
+             case "Social":
+             var color = "green"
+             break;
+             case "Misc":
+             var color = "yellow"
+             break;
+             case "Video Games":
+             var color = "pink"
+             break;
+             case "Food":
+             var color = "red"
+             break;
+             case "Outdoors":
+             var color = "orange"
+             break;
+          }
         GMaps.geocode({
         address: data.location,
         callback: function(results, status){
           if (status == "OK") {
             var latlng = results[0].geometry.location;
-            map.addMarker({
-              lat: latlng.k,
-              lng: latlng.D,
+            map.drawCircle({
+              center: latlng,
+              radius: (data.people_count * 5),
+              fillColor: color,
               infoWindow: {
                 content:
                 "<h5>"+ data.title + "</h5>" + "<p>" + data.description + "</p>" + "<p>" + data.date_start + "</p>"
