@@ -1,10 +1,10 @@
 <ion-view view-title="Create">
   <ion-content ng-controller="CreateCtrl">
     <div>
-      <form novalidate class='create-form'>
+      <form class='create-form'>
         <label class="item item-input item-stacked-label">
           <span class='input-label'>Event Name</span>
-          <input type='text' ng-model='event.name' placeholder='Event Name'/>
+          <input type='text' ng-model='event.title' placeholder='Event Name'/>
         </label>
         <label class="item item-input item-stacked-label">
           <span class='input-label'>Description</span>
@@ -13,7 +13,7 @@
         </label>
         <label class='item item-input item-select'>
           <div class='input-label'>Category</div>
-          <select name='event.category'>
+          <select ng-model='event.category'>
             <option value='sports'>Sports</option>
             <option value='entertainment'>Entertainment</option>
             <option value='social'>Social</option>
@@ -25,7 +25,7 @@
         </label>
         <label class="item item-input item-stacked-label">
            <span class='input-label'>Address</span>
-          <input type='text' ng-model='event.address' placeholder='Address'/>
+          <input type='text' ng-model='event.location' placeholder='Address'/>
         </label>
         <label class="item item-input item-stacked-label">
           <span class='input-label'>Date/Time Start</span>
@@ -35,19 +35,6 @@
           <span class='input-label'>Date/Time End</span>
           <input type='datetime-local' ng-model='event.date_end'/>
         </label>
-
-        <!-- <ul class='list'>
-          <li class="item item-checkbox">
-            <label class="checkbox">
-              <input type='checkbox' name='event.adult' ng-model="event.adult"/>
-            </label>21+</li>
-          <li class="item item-checkbox">
-            <label class="checkbox">
-              <input type='checkbox' name='event.private' ng-model="event.private"/>
-            </label>
-            Private?
-          </li>
-        </ul> -->
         <button class='button button-full button-balanced' ng-click="update(event)"/>
           Create Event
         </button>

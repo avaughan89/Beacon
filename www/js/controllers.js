@@ -1,20 +1,7 @@
 var Beacon = angular.module('Beacon.controllers', ['ng-token-auth']);
-// Auth Configuration
-// Beacon.config(function($authProvider) {
-//   $authProvider.configure({
-//             apiUrl: 'http://localhost:3000' //your api's url
-//           });
-// });
-
 
 Beacon.controller('HomeCtrl', function($scope) {
-  // Events.getEvents();
 
-  // $scope.events = Events.getEvents()
-  // .then(function(data){
-  //     $scope.events = data;
-  //     return $scope.events;
-  //   });
 });
 
 Beacon.controller('MapController', function($scope, map, Events, $http, $q) {
@@ -45,50 +32,42 @@ Beacon.controller('MapController', function($scope, map, Events, $http, $q) {
   })
 
 
-    GMaps.geolocate({
-      success: function(position) {
-        map.setCenter(position.coords.latitude, position.coords.longitude),
-        map.addMarker({
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
-          title: "You are here!",
-          infoWindow: {
-            content: "<p>Let's do some exploring!</p>"
-          }
-        })
-      },
-      error: function(error) {
-        alert('Geolocation failed' + error.message);
-      },
-      not_supported: function() {
-        alert('Your browser does not support Geolocation')
-      }
-
-    })
-
-
-
-
-
-
-
-
+  GMaps.geolocate({
+    success: function(position) {
+      map.setCenter(position.coords.latitude, position.coords.longitude)
       // map.addMarker({
-      //     lat: position.coords.latitude,
-      //     lng: position.coords.longitude,
-      //     title: "You are here!",
-      //     infoWindow: {
-      //           content: "<p>Let's do some exploring!</p>"
-      //       });
+      //   lat: position.coords.latitude,
+      //   lng: position.coords.longitude,
+      //   title: "You are here!",
+      //   infoWindow: {
+      //     content: "<p>Let's do some exploring!</p>"
+      //   }
+      // })
+    },
+    error: function(error) {
+      alert('Geolocation failed' + error.message);
+    },
+    not_supported: function() {
+      alert('Your browser does not support Geolocation')
+    }
+
+  })
+
+
 
 });
 
 
 // Beacon.controller('ProfileCtrl', function($scope) {});
 
-Beacon.controller('CreateCtrl',['$scope', '$http', function($scope,$http){
+Beacon.controller('CreateCtrl', function($scope,$http, Events, $q){
+  $scope.update = function(event) {
+    debugger;
+    Events.createEvents(event);
 
-}]);
+  }
+
+});
 
 Beacon.controller('EventsCtrl', function($scope, Events, $q, $http) {
   // $scope.events = {};
