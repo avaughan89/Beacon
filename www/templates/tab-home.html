@@ -1,6 +1,6 @@
 <ion-view view-title="Home">
-  <ion-content has-bouncing='false' ng-controller='registerCtrl'>
-    <div ng-hide='{{isSignedIn()}}' class='ng-hide'>
+  <ion-content has-bouncing='false'>
+ <!--    <div ng-hide='{{isSignedIn()}}' class='ng-hide'>
     <h1>Hello!</h1>
     <button ng-click="authenticate('facebook')">
       Sign In
@@ -10,9 +10,8 @@
     <button ng-click='signOut()'>
       Sign Out
     </button>
-    </div>
+    </div> -->
     <div ng-controller="MapController" id="map" data-tap-disabled="true">
     </div>
-
   </ion-content>
 </ion-view>

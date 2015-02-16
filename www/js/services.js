@@ -11,12 +11,12 @@ angular.module('Beacon.services', [])
   return map;
 })
 
-.factory('Beacon.geocode', function(){
+.factory('locationService', function(event){
       GMaps.geocode({
-      address: event.address,
+      address: event.location,
       callback: function(results){
         var latlng = results[0].geometry.location;
-        // console.log(latlng)
+        console.log(latlng)
         // event.address = latlng
         // console.log(event.address)
       }
@@ -28,7 +28,7 @@ angular.module('Beacon.services', [])
    // return events = ajaxFactory.request("http://localhost:3000/users/1", 'get')
    return {
     getEvents: function(){
-      return ajaxFactory.request("http://localhost:3000/users/1", 'get')
+      return ajaxFactory.request("http://localhost:3000/events", 'get')
       // $http.get("http://localhost:3000/users/1")
       // .then(function(response){
       //   if (typeof response.data === 'object') {
