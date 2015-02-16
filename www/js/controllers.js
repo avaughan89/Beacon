@@ -7,20 +7,52 @@ var Beacon = angular.module('Beacon.controllers', ['ng-token-auth']);
 // });
 
 
-Beacon.controller('HomeCtrl', function($scope, Events) {
-  Events.getEvents();
+Beacon.controller('HomeCtrl', function($scope) {
+  // Events.getEvents();
 
-  $scope.events = Events.getEvents()
-  .then(function(data){
-      $scope.events = data;
-      return $scope.events;
-    });
+  // $scope.events = Events.getEvents()
+  // .then(function(data){
+  //     $scope.events = data;
+  //     return $scope.events;
+  //   });
 });
 
-Beacon.controller('MapController', function($scope, map, Events) {
-    $scope.map = map;
-    var events = $scope.events
-    console.log(events)
+Beacon.controller('MapController', function($scope, map, Events, $http, $q) {
+  $scope.map = map;
+  Events.getEvents()
+  .then(function(data){
+    console.log(data);
+    console.log(data.length);
+    var length = data.length -1;
+    for (var i = 0; i < length; i+=1) {
+      console.log(i);
+      GMaps.geocode({
+        address: data[i].location,
+        callback: function(results, status){
+          if (status == "OK") {
+            var latlng = results[0].geometry.location;
+              console.log(latlng.k);
+              console.log(latlng.D);
+              console.log(data);
+                // data = data[i];
+            // console.log(latlng);
+            map.addMarker({
+              lat: latlng.k,
+              lng: latlng.D,
+              infoWindow: {
+                content:
+                "<h5>"+ data[i].title + "</h5>" + "<p>" + data[i].description + "</p>" + "<p>" + data[i].date_start + "</p>"
+              }
+            })
+          }
+          }
+
+        })
+    }
+
+  })
+    // console.log(data);
+
     GMaps.geolocate({
       success: function(position) {
         map.setCenter(position.coords.latitude, position.coords.longitude),
@@ -29,8 +61,8 @@ Beacon.controller('MapController', function($scope, map, Events) {
           lng: position.coords.longitude,
           title: "You are here!",
           infoWindow: {
-                content: "<p>Let's do some exploring!</p>"
-            }
+            content: "<p>Let's do some exploring!</p>"
+          }
         })
       },
       error: function(error) {
@@ -39,9 +71,11 @@ Beacon.controller('MapController', function($scope, map, Events) {
       not_supported: function() {
         alert('Your browser does not support Geolocation')
       }
+
     })
 
-    for (var i = 0; i < $scope.events.length; i++) {
+
+
 
 
 
@@ -55,7 +89,6 @@ Beacon.controller('MapController', function($scope, map, Events) {
       //           content: "<p>Let's do some exploring!</p>"
       //       });
 
-    }
 });
 
 
@@ -66,12 +99,14 @@ Beacon.controller('CreateCtrl',['$scope', '$http', function($scope,$http){
 }]);
 
 Beacon.controller('EventsCtrl', function($scope, Events, $q, $http) {
-    Events.getEvents()
-    .then(function(data){
-      // console.log(data);
-      $scope.events = data
-    })
+  // $scope.events = {};
+   // Events.getEvents()
+   //  .then(function(data){
+   //    // console.log(data);
+   //    $scope.events = data;
+   //    console.log($scope.events);
 
+   //  })
 
 });
 
