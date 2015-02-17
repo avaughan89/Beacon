@@ -9,13 +9,13 @@
 
 
     <form novalidate class='create-form'>
-      <label class="checkbox">
+      <!-- <label class="checkbox">
         <input type='checkbox' name='event.people_count'/>
         Count me In!
-      </label>
-      <button class='button button-full button-balanced' ng-click="update(event)"/>
-          RSVP
-        </button>
+      </label> -->
+      <button name='event.people_count' class='button button-full button-balanced' on-swipe-right="update(event)" on-swipe-left="no(event)">
+          <p id="choices">Are you going: {{rsvp}}</p>
+      </button>
       </form>
       <!-- List of Users attending event -->
       <!-- <ion-list ng-controller="EventsCtrl">

@@ -127,9 +127,19 @@ Beacon.controller('EventDetailCtrl', function($scope, Events, $stateParams, $htt
 
   })
   $scope.update = function(event) {
-    Events.updateCount(event);
+    Events.updateCount(event)
+    .then(function(response){
+      $scope.event.people_count = response.people_count
 
+    });
+    $scope.rsvp = "Yes"
   }
+
+  $scope.no = function(event) {
+    $scope.rsvp = "Nope"
+  }
+
+
 
   // $scope.event = Events.get($stateParams.eventId);
 });
