@@ -75,15 +75,15 @@ angular.module('Beacon', [
     })
 
 
-  // .state('tab.trending', {
-  //     url: '/trending',
-  //     views: {
-  //       'tab-trending': {
-  //         templateUrl: 'templates/tab-trending.html',
-  //         controller: 'TrendingCtrl'
-  //       }
-  //     }
-  //   })
+  .state('tab.trending', {
+      url: '/trending',
+      views: {
+        'tab-trending': {
+          templateUrl: 'templates/tab-trending.html',
+          controller: 'TrendingCtrl'
+        }
+      }
+    })
 
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/tab/home');

@@ -135,7 +135,13 @@ Beacon.controller('EventDetailCtrl', function($scope, Events, $stateParams, $htt
   // $scope.event = Events.get($stateParams.eventId);
 });
 
-// Beacon.controller('TrendingCtrl', function($scope) {});
+Beacon.controller('TrendingCtrl', function($scope, Events, $http, $q) {
+  Events.getEvents()
+  .then(function(data){
+    $scope.events = data;
+    $scope.predicate = '-people_count';
+  })
+});
 
 // Beacon.controller('registerCtrl', function ($scope, $http, $auth) {
 // //   $scope.isSignedIn = function() {
