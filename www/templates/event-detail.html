@@ -1,18 +1,15 @@
-<ion-view view-title="{{event.name}}">
+<ion-view view-title="{{event.title}}">
   <ion-content class="padding">
-    <img ng-src="{{event.picture}}" style="width: 64px; height: 64px">
     <p>
+      {{event.title}}|||||||||
       {{event.description}}
     </p>
+    <p>People Attending: {{event.people_count}}</p>
 
     <form novalidate class='create-form'>
       <label class="checkbox">
         <input type='checkbox' name='event.adult'/>
         Count me In!
-      </label>
-      <label class="checkbox">
-        <input type='checkbox' name='event.private'/>
-        Can I come?
       </label>
       </form>
       <!-- List of Users attending event -->

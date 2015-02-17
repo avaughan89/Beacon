@@ -51,11 +51,14 @@ angular.module('Beacon', [
   //     }
   //   }
   // })
-  .state('tab.event-detail', {
-    url: '/event-detail',
+  .state('tab.eventDetail', {
+    url: '/event-detail/:id',
+    // templateUrl: 'templates/event-detail.html',
+    // controller: 'EventDetailCtrl'
+    cache: false,
     views: {
-      "tab-profile": {
-        templateseUrl: 'templates/event-detail.html',
+      "tab-home": {
+        templateUrl: 'templates/event-detail.html',
         controller: 'EventDetailCtrl'
       }
     }

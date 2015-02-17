@@ -66,7 +66,7 @@ var image = {
                 opacity: 0.6,
                 infoWindow: {
                 content:
-                "<h5>"+ data.title + "</h5>" + "<p>" + data.description + "</p>" + "<p>" + data.date_start + "</p>"
+                "<h5><a href='#/tab/event-detail/" + data.id + "'>"+data.title +"</a></h5><p>" + data.description + "</p><p>" + data.date_start + "</p>"
               }
               })
           } else {
@@ -120,7 +120,13 @@ Beacon.controller('EventsCtrl', function($scope, Events, $q, $http) {
 
 });
 
-Beacon.controller('EventDetailCtrl', function() {
+Beacon.controller('EventDetailCtrl', function($scope, Events, $stateParams, $http, $q) {
+  Events.getEvent($stateParams.id).then(function(data){
+    console.log(data);
+    $scope.event = data;
+
+  })
+
   // $scope.event = Events.get($stateParams.eventId);
 });
 
