@@ -8,9 +8,12 @@
 
     <form novalidate class='create-form'>
       <label class="checkbox">
-        <input type='checkbox' name='event.adult'/>
+        <input type='checkbox' name='event.people_count'/>
         Count me In!
       </label>
+      <button class='button button-full button-balanced' ng-click="update(event)"/>
+          RSVP
+        </button>
       </form>
       <!-- List of Users attending event -->
       <ion-list ng-controller="EventsCtrl">

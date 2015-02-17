@@ -125,7 +125,12 @@ Beacon.controller('EventDetailCtrl', function($scope, Events, $stateParams, $htt
     console.log(data);
     $scope.event = data;
 
+
   })
+  $scope.update = function(event) {
+    Events.updateCount(event);
+
+  }
 
   // $scope.event = Events.get($stateParams.eventId);
 });
