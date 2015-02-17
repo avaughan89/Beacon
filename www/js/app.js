@@ -42,15 +42,6 @@ angular.module('Beacon', [
     }
   })
 
-  // .state('tab.profile', {
-  //   url: '/profile',
-  //   views: {
-  //     'tab-profile': {
-  //       templateUrl: 'templates/tab-profile.html',
-  //       controller: 'ProfileCtrl'
-  //     }
-  //   }
-  // })
   .state('tab.eventDetail', {
     url: '/event-detail/:id',
     // templateUrl: 'templates/event-detail.html',
@@ -63,6 +54,15 @@ angular.module('Beacon', [
       }
     }
   })
+  // .state('tab.profile', {
+  //   url: '/profile',
+  //   views: {
+  //     'tab-profile': {
+  //       templateUrl: 'templates/tab-profile.html',
+  //       controller: 'ProfileCtrl'
+  //     }
+  //   }
+  // })
 
   .state('tab.create', {
       url: '/create',
