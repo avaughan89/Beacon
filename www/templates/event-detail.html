@@ -1,10 +1,12 @@
-<ion-view view-title="{{event.title}}">
+<ion-view view-title="Event">
   <ion-content class="padding">
-    <p>
-      {{event.title}}|||||||||
-      {{event.description}}
-    </p>
+
+    <h2>{{event.title}}</h2>
+    <p>{{event.description}}</p>
+    <p>Start Time: {{event.date_start}}</p>
+    <p>End Time: {{event.date_end}}</p>
     <p>People Attending: {{event.people_count}}</p>
+
 
     <form novalidate class='create-form'>
       <label class="checkbox">
