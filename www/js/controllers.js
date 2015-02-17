@@ -8,7 +8,7 @@ Beacon.controller('MapController', function($scope, map, Events, $http, $q) {
   $scope.map = map;
 
 var image = {
-    url: 'http://plebeosaur.us/etc/map/bluedot_retina.png',
+    url: '../img/beaconbang.png',
     // This marker is 20 pixels wide by 32 pixels tall.
     size: new google.maps.Size(32, 32),
     // The origin for this image is 0,0.
@@ -61,6 +61,9 @@ var image = {
                 lat: latlng.k,
                 lng: latlng.D,
                 icon: image,
+                title: "I might be here",
+                optimized: false,
+                opacity: 0.6,
                 infoWindow: {
                 content:
                 "<h5>"+ data.title + "</h5>" + "<p>" + data.description + "</p>" + "<p>" + data.date_start + "</p>"
