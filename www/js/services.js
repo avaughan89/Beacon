@@ -22,6 +22,9 @@ angular.module('Beacon.services', [])
     },
     getEvent: function(id){
       return ajaxFactory.request("http://localhost:3000/events/" + id, 'get')
+    },
+    updateCount: function(data) {
+      return ajaxFactory.request("http://localhost:3000/events/" + data.id, 'put')
     }
    };
 });
