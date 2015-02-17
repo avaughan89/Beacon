@@ -23,7 +23,14 @@ var image = {
   .then(function(data){
     var i;
     var j = data;
+
+    var slowlyAddMarker = function() {
+
+    }
+
     var markerMarker = function(data) {
+      var deferred = $q.defer();
+
         switch (data.category){
           case "Sports":
           var color = "red"
@@ -55,8 +62,9 @@ var image = {
               center: latlng,
               radius: (data.people_count * 5),
               fillColor: color
-            }),
-
+            })
+            console.log("hello")
+            deferred.resolve(
             map.addMarker({
                 lat: latlng.k,
                 lng: latlng.D,
@@ -68,19 +76,35 @@ var image = {
                 content:
                 "<h5><a href='#/tab/event-detail/" + data.id + "'>"+data.title +"</a></h5><p>" + data.description + "</p><p>" + data.date_start + "</p>"
               }
-              })
+              }))
           } else {
+
+            deferred.reject("error " + data);
             console.log("error", data)
           };
         }
 
       })
+  return deferred.promise;
 }
     for (var i = 0; i < j.length; i+=1) {
-    markerMarker(data[i])
+
+    markerMarker(data[i]).then(function() {
+      console.log("in the thing")
+    });
     }
   })
+    setTimeout(function() {
 
+      $('<style>@-webkit-keyframes pulsate2 {from {-webkit-transform: scale(0.25);opacity: 1.0;}95% {-webkit-transform: scale(16.3);opacity: 0;color: red;}to {-webkit-transform: scale(0.3);opacity: 0;}}</style>').appendTo('head');
+
+      $('#map div.gmnoprint[title="I might be here"]').css('animation', "pulsate2 1.5s ease-in-out infinite");
+
+      console.log('after jquery')
+      }, 5000);
+
+  // $('.gmnoprint').addClass('pulsation')
+// $('#map div.gmnoprint[title="I might be here"]').css('animation')
 
   GMaps.geolocate({
     success: function(position) {
