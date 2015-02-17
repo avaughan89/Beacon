@@ -122,7 +122,6 @@ Beacon.controller('EventsCtrl', function($scope, Events, $q, $http) {
 
 Beacon.controller('EventDetailCtrl', function($scope, Events, $stateParams, $http, $q) {
   Events.getEvent($stateParams.id).then(function(data){
-    console.log(data);
     $scope.event = data;
 
 
