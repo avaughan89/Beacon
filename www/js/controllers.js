@@ -121,6 +121,8 @@ Beacon.controller('EventsCtrl', function($scope, Events, $q, $http) {
 });
 
 Beacon.controller('EventDetailCtrl', function($scope, Events, $stateParams, $http, $q) {
+  $scope.swiped = false;
+
   Events.getEvent($stateParams.id).then(function(data){
     $scope.event = data;
 
@@ -129,7 +131,8 @@ Beacon.controller('EventDetailCtrl', function($scope, Events, $stateParams, $htt
   $scope.update = function(event) {
     Events.updateCount(event)
     .then(function(response){
-      $scope.event.people_count = response.people_count
+      $scope.event.people_count = response.people_count;
+      $scope.swiped = true;
 
     });
     $scope.rsvp = "Yes"
