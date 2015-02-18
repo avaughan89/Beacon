@@ -2806,7 +2806,11 @@ a.subdued {
     background-image: linear-gradient(0deg, #28a54c, #28a54c 50%, transparent 50%);
     color: #fff; }
     .bar.bar-balanced .title {
-      color: #fff; }
+      color: #fff;
+      font-family: 'Nixie One', cursive;
+      font-weight: bold;
+      font-size: 1.6em;
+       }
     .bar.bar-balanced.bar-footer {
       background-image: linear-gradient(180deg, #28a54c, #0c63ee 50%, transparent 50%); }
   .bar.bar-energized {

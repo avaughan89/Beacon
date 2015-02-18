@@ -114,3 +114,11 @@
 //head script injection
 </script>
 <style>
+
+.bar.bar-balanced .title {
+      color: #fff;
+      font-family: 'Nixie One', cursive;
+    }
+.header {
+font-family: 'Nixie One', cursive;
+}
