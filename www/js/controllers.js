@@ -121,21 +121,39 @@ Beacon.controller('EventsCtrl', function($scope, Events, $q, $http) {
 });
 
 Beacon.controller('EventDetailCtrl', function($scope, Events, $stateParams, $http, $q) {
+  $scope.swiped = false;
+
   Events.getEvent($stateParams.id).then(function(data){
-    console.log(data);
     $scope.event = data;
 
 
   })
   $scope.update = function(event) {
-    Events.updateCount(event);
+    Events.updateCount(event)
+    .then(function(response){
+      $scope.event.people_count = response.people_count;
+      $scope.swiped = true;
 
+    });
+    $scope.rsvp = "Yes"
   }
+
+  $scope.no = function(event) {
+    $scope.rsvp = "Nope"
+  }
+
+
 
   // $scope.event = Events.get($stateParams.eventId);
 });
 
-// Beacon.controller('TrendingCtrl', function($scope) {});
+Beacon.controller('TrendingCtrl', function($scope, Events, $http, $q) {
+  Events.getEvents()
+  .then(function(data){
+    $scope.events = data;
+    $scope.predicate = '-people_count';
+  })
+});
 
 // Beacon.controller('registerCtrl', function ($scope, $http, $auth) {
 // //   $scope.isSignedIn = function() {

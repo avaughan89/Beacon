@@ -1,26 +1,31 @@
-<ion-view view-title="{{event.title}}">
+<ion-view view-title="Event">
   <ion-content class="padding">
-    <p>
-      {{event.title}}|||||||||
-      {{event.description}}
-    </p>
+
+    <h2>{{event.title}}</h2>
+    <p>{{event.description}}</p>
+    <p>Start Time: {{event.date_start}}</p>
+    <p>End Time: {{event.date_end}}</p>
     <p>People Attending: {{event.people_count}}</p>
 
+
     <form novalidate class='create-form'>
-      <label class="checkbox">
+      <!-- <label class="checkbox">
         <input type='checkbox' name='event.people_count'/>
         Count me In!
-      </label>
-      <button class='button button-full button-balanced' ng-click="update(event)"/>
-          RSVP
-        </button>
+      </label> -->
+      <button name='event.people_count' class='button button-full'
+        ng-class="swiped ? 'button-balanced' : 'button-assertive'"
+        on-swipe-right="update(event)"
+        on-swipe-left="no(event)">
+        <p id="choices">Are you going: {{rsvp}}</p>
+      </button>
       </form>
       <!-- List of Users attending event -->
-      <ion-list ng-controller="EventsCtrl">
+      <!-- <ion-list ng-controller="EventsCtrl">
         <ion-item class="item-avatar" ng-repeat="event in events" type="item-text-wrap" href="#/event-detail/{{event.id}}">
           <img ng-src="{{event.picture}}">
           <h2>{{event.name}}</h2>
         </ion-item>
-      </ion-list>
+      </ion-list> -->
   </ion-content>
 </ion-view>
