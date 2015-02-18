@@ -16,8 +16,7 @@ var image = {
     // The anchor for this image is the base of the flagpole at 0,32.
     anchor: new google.maps.Point(15, 15)
   };
-
-
+var pulseFactor = .1;
 
   Events.getEvents()
   .then(function(data){
@@ -60,8 +59,9 @@ var image = {
             map.addMarker({
                 lat: latlng.k,
                 lng: latlng.D,
+                details: {ppl_count: data.people_count},
                 icon: image,
-                title: "I might be here",
+                title: " " + data.people_count + " Beacs are coming!",
                 optimized: false,
                 opacity: 0.6,
                 infoWindow: {
@@ -76,11 +76,38 @@ var image = {
 
       })
 }
+
+    map.on('marker_added', function(marker) {
+      var ppl_count = marker.details.ppl_count
+
+      $('<style>@-webkit-keyframes pulsate' + ppl_count.toString() + '{from {-webkit-transform: scale(0.25);opacity: 1.0;}95% {-webkit-transform: scale(' + (ppl_count*pulseFactor).toString() + ');opacity: 0;color: red;}to {-webkit-transform: scale(0.3);opacity: 0;}}</style>').appendTo('head');
+
+    })
     for (var i = 0; i < j.length; i+=1) {
-    markerMarker(data[i])
+      markerMarker(data[i])
     }
   })
 
+function setPulseRadius(marker) {
+  console.log('outside if statement')
+  if (marker.attributes.title) {
+    console.log('in if statement')
+    var ppl_count = marker.attributes.title.value.match(/\d+/i);
+
+    marker.style.webkitAnimation = 'pulsate' + ppl_count + ' 1.5s ease-in-out infinite';
+    debugger
+
+  }
+}
+
+setTimeout(function() {
+  var eventElems = $('#map div.gmnoprint');
+  for (var i = 0; i < eventElems.length; i++) {
+      setPulseRadius(eventElems[i]);
+    }
+}, 3000);
+
+// $('#map div.gmnoprint[title="I might be here"]:eq(-1)')
 
   GMaps.geolocate({
     success: function(position) {
