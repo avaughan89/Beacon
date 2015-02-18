@@ -7,29 +7,22 @@ Beacon.controller('HomeCtrl', function($scope) {
 Beacon.controller('MapController', function($scope, map, Events, $http, $q) {
   $scope.map = map;
 
-var image = {
-    url: '../img/beaconbang.png',
-    // This marker is 20 pixels wide by 32 pixels tall.
-    size: new google.maps.Size(32, 32),
-    // The origin for this image is 0,0.
-    origin: new google.maps.Point(0,0),
-    // The anchor for this image is the base of the flagpole at 0,32.
-    anchor: new google.maps.Point(15, 15)
-  };
-
-
+  var image = {
+      url: '../img/beaconbang.png',
+      // This marker is 20 pixels wide by 32 pixels tall.
+      size: new google.maps.Size(32, 32),
+      // The origin for this image is 0,0.
+      origin: new google.maps.Point(0,0),
+      // The anchor for this image is the base of the flagpole at 0,32.
+      anchor: new google.maps.Point(15, 15)
+    };
 
   Events.getEvents()
   .then(function(data){
     var i;
     var j = data;
 
-    var slowlyAddMarker = function() {
-
-    }
-
     var markerMarker = function(data) {
-      var deferred = $q.defer();
 
         switch (data.category){
           case "Sports":
@@ -63,61 +56,41 @@ var image = {
               radius: (data.people_count * 5),
               fillColor: color
             })
-            console.log("hello")
-            deferred.resolve(
+
             map.addMarker({
                 lat: latlng.k,
                 lng: latlng.D,
                 icon: image,
-                title: "I might be here",
+                title: "Join Us!",
                 optimized: false,
                 opacity: 0.6,
                 infoWindow: {
-                content:
-                "<h5><a href='#/tab/event-detail/" + data.id + "'>"+data.title +"</a></h5><p>" + data.description + "</p><p>" + data.date_start + "</p>"
-              }
-              }))
+                  content:
+                  "<h5><a href='#/tab/event-detail/" + data.id + "'>"+data.title +"</a></h5><p>" + data.description + "</p><p>" + data.date_start + "</p>"
+                }
+              })
+            console.log("hello")
           } else {
-
-            deferred.reject("error " + data);
             console.log("error", data)
           };
         }
 
       })
-  return deferred.promise;
 }
+ //   map.on('marker_added', function(marker) {
+ //     $('<style>@-webkit-keyframes pulsate2 {from {-webkit-transform: scale(0.25);opacity: 1.0;}95% {-webkit-transform: scale(16.3);opacity: 0;color: red;}to {-webkit-transform: scale(0.3);opacity: 0;}}</style>').appendTo('head');
+//      $('#map div.gmnoprint[title="Join Us!"]').css('animation', "pulsate2 1.5s ease-in-out infinite");
+//    })
     for (var i = 0; i < j.length; i+=1) {
-
-    markerMarker(data[i]).then(function() {
-      console.log("in the thing")
-    });
+      markerMarker(data[i])
     }
   })
-    setTimeout(function() {
 
-      $('<style>@-webkit-keyframes pulsate2 {from {-webkit-transform: scale(0.25);opacity: 1.0;}95% {-webkit-transform: scale(16.3);opacity: 0;color: red;}to {-webkit-transform: scale(0.3);opacity: 0;}}</style>').appendTo('head');
+setTimeout(function() {
+//  $('<style>@-webkit-keyframes pulsate2 {from {-webkit-transform: scale(0.25);opacity: 1.0;}95% {-webkit-transform: scale(16.3);opacity: 0;color: red;}to {-webkit-transform: scale(0.3);opacity: 0;}}</style>').appendTo('head');
 
-      $('#map div.gmnoprint[title="I might be here"]').css('animation', "pulsate2 1.5s ease-in-out infinite");
-
-      console.log('after jquery')
-      }, 5000);
-
-  // $('.gmnoprint').addClass('pulsation')
-// $('#map div.gmnoprint[title="I might be here"]').css('animation')
-
-  GMaps.geolocate({
-    success: function(position) {
-      map.setCenter(position.coords.latitude, position.coords.longitude)
-    },
-    error: function(error) {
-      alert('Geolocation failed' + error.message);
-    },
-    not_supported: function() {
-      alert('Your browser does not support Geolocation')
-    }
-
-  })
+//    $('#map div.gmnoprint[title="I might be here"]:eq(-1)').css('animation', "pulsate2 1.5s ease-in-out infinite");
+}, 4000);
 
 });
 
