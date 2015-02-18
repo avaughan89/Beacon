@@ -1,9 +1,12 @@
 <ion-view view-title="Trending">
-  <ion-content ng-controller="EventsCtrl">
+  <ion-content>
     <ion-list>
-      <ion-item class="item-avatar" ng-repeat="event in events" type="item-text-wrap" href="#/event-detail/{{event.id}}">
-        <img ng-src="{{event.picture}}">
-        <h2>{{event.name}}</h2>
+      <ion-item class="item-avatar" ng-repeat="event in events | orderBy:predicate:reverse" type="item-text-wrap" href="#tab/event-detail/{{event.id}}">
+        <h2>{{event.title}}</h2>
+        <p>{{event.description}}</p>
+        <p>Start Time: {{event.date_start}}</p>
+        <p>End Time: {{event.date_end}}</p>
+        <p>People Attending: {{event.people_count}}</p>
       </ion-item>
     </ion-list>
   </ion-content>

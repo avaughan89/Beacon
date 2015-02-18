@@ -7,15 +7,16 @@ Beacon.controller('HomeCtrl', function($scope) {
 Beacon.controller('MapController', function($scope, map, Events, $http, $q) {
   $scope.map = map;
 
-  var image = {
-      url: '../img/beaconbang.png',
-      // This marker is 20 pixels wide by 32 pixels tall.
-      size: new google.maps.Size(32, 32),
-      // The origin for this image is 0,0.
-      origin: new google.maps.Point(0,0),
-      // The anchor for this image is the base of the flagpole at 0,32.
-      anchor: new google.maps.Point(15, 15)
-    };
+var image = {
+    url: '../img/beaconbang.png',
+    // This marker is 20 pixels wide by 32 pixels tall.
+    size: new google.maps.Size(32, 32),
+    // The origin for this image is 0,0.
+    origin: new google.maps.Point(0,0),
+    // The anchor for this image is the base of the flagpole at 0,32.
+    anchor: new google.maps.Point(15, 15)
+  };
+var pulseFactor = .1;
 
   Events.getEvents()
   .then(function(data){
@@ -60,8 +61,9 @@ Beacon.controller('MapController', function($scope, map, Events, $http, $q) {
             map.addMarker({
                 lat: latlng.k,
                 lng: latlng.D,
+                details: {ppl_count: data.people_count},
                 icon: image,
-                title: "Join Us!",
+                title: " " + data.people_count + " Beacs are coming!",
                 optimized: false,
                 opacity: 0.6,
                 infoWindow: {
@@ -77,17 +79,39 @@ Beacon.controller('MapController', function($scope, map, Events, $http, $q) {
 
       })
 }
- //   map.on('marker_added', function(marker) {
- //     $('<style>@-webkit-keyframes pulsate2 {from {-webkit-transform: scale(0.25);opacity: 1.0;}95% {-webkit-transform: scale(16.3);opacity: 0;color: red;}to {-webkit-transform: scale(0.3);opacity: 0;}}</style>').appendTo('head');
-//      $('#map div.gmnoprint[title="Join Us!"]').css('animation', "pulsate2 1.5s ease-in-out infinite");
-//    })
+
+    map.on('marker_added', function(marker) {
+      var ppl_count = marker.details.ppl_count
+
+      $('<style>@-webkit-keyframes pulsate' + ppl_count.toString() + '{from {-webkit-transform: scale(0.25);opacity: 1.0;}95% {-webkit-transform: scale(' + (ppl_count*pulseFactor).toString() + ');opacity: 0;color: red;}to {-webkit-transform: scale(0.3);opacity: 0;}}</style>').appendTo('head');
+
+    })
+
     for (var i = 0; i < j.length; i+=1) {
       markerMarker(data[i])
     }
   })
 
+function setPulseRadius(marker) {
+  console.log('outside if statement')
+  if (marker.attributes.title) {
+    console.log('in if statement')
+    var ppl_count = marker.attributes.title.value.match(/\d+/i);
+
+    marker.style.webkitAnimation = 'pulsate' + ppl_count + ' 1.5s ease-in-out infinite';
+    debugger
+
+  }
+}
+
 setTimeout(function() {
-//  $('<style>@-webkit-keyframes pulsate2 {from {-webkit-transform: scale(0.25);opacity: 1.0;}95% {-webkit-transform: scale(16.3);opacity: 0;color: red;}to {-webkit-transform: scale(0.3);opacity: 0;}}</style>').appendTo('head');
+  var eventElems = $('#map div.gmnoprint');
+  for (var i = 0; i < eventElems.length; i++) {
+      setPulseRadius(eventElems[i]);
+    }
+}, 3000);
+
+// $('#map div.gmnoprint[title="I might be here"]:eq(-1)')
 
 //    $('#map div.gmnoprint[title="I might be here"]:eq(-1)').css('animation', "pulsate2 1.5s ease-in-out infinite");
 }, 4000);
@@ -118,21 +142,39 @@ Beacon.controller('EventsCtrl', function($scope, Events, $q, $http) {
 });
 
 Beacon.controller('EventDetailCtrl', function($scope, Events, $stateParams, $http, $q) {
+  $scope.swiped = false;
+
   Events.getEvent($stateParams.id).then(function(data){
-    console.log(data);
     $scope.event = data;
 
 
   })
   $scope.update = function(event) {
-    Events.updateCount(event);
+    Events.updateCount(event)
+    .then(function(response){
+      $scope.event.people_count = response.people_count;
+      $scope.swiped = true;
 
+    });
+    $scope.rsvp = "Yes"
   }
+
+  $scope.no = function(event) {
+    $scope.rsvp = "Nope"
+  }
+
+
 
   // $scope.event = Events.get($stateParams.eventId);
 });
 
-// Beacon.controller('TrendingCtrl', function($scope) {});
+Beacon.controller('TrendingCtrl', function($scope, Events, $http, $q) {
+  Events.getEvents()
+  .then(function(data){
+    $scope.events = data;
+    $scope.predicate = '-people_count';
+  })
+});
 
 // Beacon.controller('registerCtrl', function ($scope, $http, $auth) {
 // //   $scope.isSignedIn = function() {
