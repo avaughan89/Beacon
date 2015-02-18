@@ -111,11 +111,6 @@ setTimeout(function() {
     }
 }, 3000);
 
-// $('#map div.gmnoprint[title="I might be here"]:eq(-1)')
-
-//    $('#map div.gmnoprint[title="I might be here"]:eq(-1)').css('animation', "pulsate2 1.5s ease-in-out infinite");
-}, 4000);
-
 });
 
 
