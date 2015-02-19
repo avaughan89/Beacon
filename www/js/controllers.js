@@ -48,6 +48,19 @@ var pulseFactor = .1;
   Events.getEvents()
   .then(function(data){
     var j = data;
+    function formatDate(date) {
+      var hours = date.getHours();
+      var minutes = date.getMinutes();
+      var ampm = hours >= 12 ? 'pm' : 'am';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      minutes = minutes < 10 ? '0'+minutes : minutes;
+      var strTime = hours + ':' + minutes + ' ' + ampm;
+      return date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
+    }
+
+    // var e = formatDate(d);
+    // alert(e);
 
     var markerMarker = function(data) {
 
@@ -58,12 +71,13 @@ var pulseFactor = .1;
         callback: function(results, status){
           if (status == "OK") {
             var latlng = results[0].geometry.location;
+
             map.drawCircle({
               center: latlng,
               radius: (data.people_count * 10),
               fillColor: color
             })
-
+            data.date_start = new Date()
             map.addMarker({
                 lat: latlng.k,
                 lng: latlng.D,
@@ -74,7 +88,7 @@ var pulseFactor = .1;
                 opacity: 0.6,
                 infoWindow: {
                   content:
-                  "<h5><a href='#/tab/event-detail/" + data.id + "'>"+data.title +"</a></h5><p>" + data.description + "</p><p>" + data.date_start + "</p>"
+                  "<h5><a href='#/tab/event-detail/" + data.id + "'>"+data.title +"</a></h5><p>" + data.description + "</p><p class='time'>" + formatDate(data.date_start) + "</p>"
                 }
               })
             console.log("hello")
@@ -114,8 +128,9 @@ function setPulseRadius(marker) {
 setTimeout(function() {
   var eventElems = $('#map div.gmnoprint');
   for (var i = 0; i < eventElems.length; i++) {
-      setPulseRadius(eventElems[i]);
+      setPulseRadius(eventElems[i])
     }
+  // $filter('.time')(date, format, timezone);
 }, 2500);
 
 });
