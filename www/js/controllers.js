@@ -91,7 +91,7 @@ var pulseFactor = .1;
                   "<h5><a href='#/tab/event-detail/" + data.id + "'>"+data.title +"</a></h5><p>" + data.description + "</p><p class='time'>" + formatDate(data.date_start) + "</p>"
                 }
               })
-            console.log("hello")
+            // console.log("hello")
           } else {
             console.log("error", data)
           };
@@ -113,9 +113,9 @@ var pulseFactor = .1;
   })
 
 function setPulseRadius(marker) {
-  console.log('outside if statement')
+  // console.log('outside if statement')
   if (marker.attributes.title) {
-    console.log('in if statement')
+    // console.log('in if statement')
     marker_info = marker.attributes.title.value;
     var ppl_count = marker_info.match(/\d+/i);
     var category = marker_info.match(/(\w+) event!$/i)[1]
