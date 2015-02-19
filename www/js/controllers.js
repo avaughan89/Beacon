@@ -1,4 +1,4 @@
-var Beacon = angular.module('Beacon.controllers', ['ng-token-auth']);
+var Beacon = angular.module('Beacon.controllers', []);
 
 Beacon.controller('HomeCtrl', function($scope) {
 
@@ -18,35 +18,41 @@ var image = {
   };
 var pulseFactor = .1;
 
+    function colorMatcher(toMatch) {
+      switch (toMatch){
+        case "Sports":
+          var color = "red"
+          break;
+        case "Entertainment":
+          var color = "blue"
+          break;
+        case "Social":
+          var color = "green"
+          break;
+        case "Misc":
+          var color = "yellow"
+          break;
+        case "Video Games":
+          var color = "pink"
+          break;
+        case "Food":
+          var color = "red"
+          break;
+        case "Outdoors":
+          var color = "orange"
+          break;
+          }
+      return color;
+    }
+
   Events.getEvents()
   .then(function(data){
-    var i;
     var j = data;
 
     var markerMarker = function(data) {
 
-        switch (data.category){
-          case "Sports":
-          var color = "red"
-          case "Entertainment":
-             var color = "blue"
-             break;
-             case "Social":
-             var color = "green"
-             break;
-             case "Misc":
-             var color = "yellow"
-             break;
-             case "Video Games":
-             var color = "pink"
-             break;
-             case "Food":
-             var color = "red"
-             break;
-             case "Outdoors":
-             var color = "orange"
-             break;
-          }
+      var color = colorMatcher(data.category);
+
         GMaps.geocode({
         address: data.location,
         callback: function(results, status){
@@ -54,7 +60,7 @@ var pulseFactor = .1;
             var latlng = results[0].geometry.location;
             map.drawCircle({
               center: latlng,
-              radius: (data.people_count * 5),
+              radius: (data.people_count * 10),
               fillColor: color
             })
 
@@ -63,7 +69,7 @@ var pulseFactor = .1;
                 lng: latlng.D,
                 details: {ppl_count: data.people_count},
                 icon: image,
-                title: " " + data.people_count + " Beacs are coming!",
+                title: " " + data.people_count + " Beacs are coming to this " + data.category + " event!",
                 optimized: false,
                 opacity: 0.6,
                 infoWindow: {
@@ -96,12 +102,13 @@ function setPulseRadius(marker) {
   console.log('outside if statement')
   if (marker.attributes.title) {
     console.log('in if statement')
-    var ppl_count = marker.attributes.title.value.match(/\d+/i);
-
+    marker_info = marker.attributes.title.value;
+    var ppl_count = marker_info.match(/\d+/i);
+    var category = marker_info.match(/(\w+) event!$/i)[1]
+    var color = colorMatcher(category);
     marker.style.webkitAnimation = 'pulsate' + ppl_count + ' 1.5s ease-in-out infinite';
-    debugger
-
   }
+    marker.style.boxShadow = 'inset 0 0 5px ' + color + ', inset 0 0 5px ' + color + ', inset 0 0 5px ' + color + ', 0 0 5px ' + color + ', 0 0 5px ' + color + ', 0 0 5px ' + color;
 }
 
 setTimeout(function() {
@@ -109,7 +116,7 @@ setTimeout(function() {
   for (var i = 0; i < eventElems.length; i++) {
       setPulseRadius(eventElems[i]);
     }
-}, 3000);
+}, 2500);
 
 });
 
@@ -138,7 +145,7 @@ Beacon.controller('EventsCtrl', function($scope, Events, $q, $http) {
 
 Beacon.controller('EventDetailCtrl', function($scope, Events, $stateParams, $http, $q) {
   $scope.swiped = false;
-
+  $scope.noSwipe = true;
   Events.getEvent($stateParams.id).then(function(data){
     $scope.event = data;
 
@@ -149,13 +156,16 @@ Beacon.controller('EventDetailCtrl', function($scope, Events, $stateParams, $htt
     .then(function(response){
       $scope.event.people_count = response.people_count;
       $scope.swiped = true;
+      $scope.noSwipe = false;
 
     });
     $scope.rsvp = "Yes"
   }
 
   $scope.no = function(event) {
-    $scope.rsvp = "Nope"
+    $scope.rsvp = "Nope";
+    $scope.swiped = false;
+    $scope.noSwipe = false;
   }
 
 
