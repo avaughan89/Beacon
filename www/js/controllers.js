@@ -124,8 +124,10 @@ setTimeout(function() {
 // Beacon.controller('ProfileCtrl', function($scope) {});
 
 Beacon.controller('CreateCtrl', function($scope,$http, Events, $q){
+  $scope.clicked = false;
   $scope.update = function(event) {
     Events.createEvents(event);
+    $scope.clicked = true;
 
   }
 

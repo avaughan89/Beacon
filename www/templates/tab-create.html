@@ -35,7 +35,7 @@
           <span class='input-label'>Date/Time End</span>
           <input type='datetime-local' ng-model='event.date_end'/>
         </label>
-        <button class='button button-full button-balanced' ng-click="update(event)"/>
+        <button class='button button-full' ng-class="clicked ? 'button-balanced' : 'button-dark'" ng-click="update(event)"/>
           Create Event
         </button>
       </form>
