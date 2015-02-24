@@ -7,43 +7,39 @@ Beacon.controller('HomeCtrl', function($scope) {
 Beacon.controller('MapController', function($scope, map, Events, $http, $q) {
   $scope.map = map;
 
-var image = {
+  var image = {
     url: '../img/beaconbangsmall.png',
-    // This marker is 20 pixels wide by 32 pixels tall.
     size: new google.maps.Size(32, 32),
-    // The origin for this image is 0,0.
     origin: new google.maps.Point(0,0),
-    // The anchor for this image is the base of the flagpole at 0,32.
     anchor: new google.maps.Point(9.1, 9)
   };
-var pulseFactor = .1;
-
-    function colorMatcher(toMatch) {
-      switch (toMatch){
-        case "Sports":
-          var color = "red"
-          break;
-        case "Entertainment":
-          var color = "blue"
-          break;
-        case "Social":
-          var color = "green"
-          break;
-        case "Misc":
-          var color = "yellow"
-          break;
-        case "Video Games":
-          var color = "pink"
-          break;
-        case "Food":
-          var color = "red"
-          break;
-        case "Outdoors":
-          var color = "orange"
-          break;
-          }
-      return color;
+  var pulseFactor = .1;
+  function colorMatcher(toMatch) {
+    switch (toMatch){
+      case "Sports":
+      var color = "red"
+      break;
+      case "Entertainment":
+      var color = "blue"
+      break;
+      case "Social":
+      var color = "green"
+      break;
+      case "Misc":
+      var color = "yellow"
+      break;
+      case "Video Games":
+      var color = "pink"
+      break;
+      case "Food":
+      var color = "red"
+      break;
+      case "Outdoors":
+      var color = "orange"
+      break;
     }
+    return color;
+  }
 
   Events.getEvents()
   .then(function(data){
@@ -59,14 +55,11 @@ var pulseFactor = .1;
       return date.getMonth()+1 + "/" + date.getDate() + "/" + date.getFullYear() + "  " + strTime;
     }
 
-    // var e = formatDate(d);
-    // alert(e);
-
     var markerMarker = function(data) {
 
       var color = colorMatcher(data.category);
 
-        GMaps.geocode({
+      GMaps.geocode({
         address: data.location,
         callback: function(results, status){
           if (status == "OK") {
@@ -79,63 +72,58 @@ var pulseFactor = .1;
             })
             data.date_start = new Date()
             map.addMarker({
-                lat: latlng.k,
-                lng: latlng.D,
-                details: {ppl_count: data.people_count},
-                icon: image,
-                title: " " + data.people_count + " Beacs are coming to this " + data.category + " event!",
-                optimized: false,
-                opacity: 0.6,
-                infoWindow: {
-                  content:
-                  "<h5><a href='#/tab/event-detail/" + data.id + "'>"+data.title +"</a></h5><p>" + data.description + "</p><p class='time'>" + formatDate(data.date_start) + "</p>"
-                }
-              })
-            // console.log("hello")
+              lat: latlng.k,
+              lng: latlng.D,
+              details: {ppl_count: data.people_count},
+              icon: image,
+              title: " " + data.people_count + " Beacs are coming to this " + data.category + " event!",
+              optimized: false,
+              opacity: 0.6,
+              infoWindow: {
+                content:
+                "<h5><a href='#/tab/event-detail/" + data.id + "'>"+data.title +"</a></h5><p>" + data.description + "</p><p class='time'>" + formatDate(data.date_start) + "</p>"
+              }
+            })
           } else {
             console.log("error", data)
           };
         }
-
       })
 }
 
-    map.on('marker_added', function(marker) {
-      var ppl_count = marker.details.ppl_count
+map.on('marker_added', function(marker) {
+  var ppl_count = marker.details.ppl_count
 
-      $('<style>@-webkit-keyframes pulsate' + ppl_count.toString() + '{from {-webkit-transform: scale(0.25);opacity: 1.0;}95% {-webkit-transform: scale(' + (ppl_count*pulseFactor).toString() + ');opacity: 0;color: red;}to {-webkit-transform: scale(0.3);opacity: 0;}}</style>').appendTo('head');
+  $('<style>@-webkit-keyframes pulsate' + ppl_count.toString() + '{from {-webkit-transform: scale(0.25);opacity: 1.0;}95% {-webkit-transform: scale(' + (ppl_count*pulseFactor).toString() + ');opacity: 0;color: red;}to {-webkit-transform: scale(0.3);opacity: 0;}}</style>').appendTo('head');
 
-    })
+})
 
-    for (var i = 0; i < j.length; i+=1) {
-      markerMarker(data[i])
+for (var i = 0; i < j.length; i+=1) {
+  markerMarker(data[i])
     }
   })
 
 function setPulseRadius(marker) {
-  // console.log('outside if statement')
   if (marker.attributes.title) {
-    // console.log('in if statement')
     marker_info = marker.attributes.title.value;
     var ppl_count = marker_info.match(/\d+/i);
     var category = marker_info.match(/(\w+) event!$/i)[1]
     var color = colorMatcher(category);
     marker.style.webkitAnimation = 'pulsate' + ppl_count + ' 1.5s ease-in-out infinite';
   }
-    marker.style.boxShadow = 'inset 0 0 5px ' + color + ', inset 0 0 5px ' + color + ', inset 0 0 5px ' + color + ', 0 0 5px ' + color + ', 0 0 5px ' + color + ', 0 0 5px ' + color;
+  marker.style.boxShadow = 'inset 0 0 5px ' + color + ', inset 0 0 5px ' + color + ', inset 0 0 5px ' + color + ', 0 0 5px ' + color + ', 0 0 5px ' + color + ', 0 0 5px ' + color;
 }
 
 setTimeout(function() {
   var eventElems = $('#map div.gmnoprint');
   for (var i = 0; i < eventElems.length; i++) {
-      setPulseRadius(eventElems[i])
-    }
-  // $filter('.time')(date, format, timezone);
+    setPulseRadius(eventElems[i])
+  }
 }, 2500);
 
 });
 
-
+// Profile controller to match views that have been disabled.
 // Beacon.controller('ProfileCtrl', function($scope) {});
 
 Beacon.controller('CreateCtrl', function($scope,$http, Events, $q){
@@ -145,7 +133,6 @@ Beacon.controller('CreateCtrl', function($scope,$http, Events, $q){
     $scope.clicked = true;
 
   }
-
 });
 
 Beacon.controller('EventsCtrl', function($scope, Events, $q, $http) {
@@ -185,9 +172,6 @@ Beacon.controller('EventDetailCtrl', function($scope, Events, $stateParams, $htt
     $scope.noSwipe = false;
   }
 
-
-
-  // $scope.event = Events.get($stateParams.eventId);
 });
 
 Beacon.controller('TrendingCtrl', function($scope, Events, $http, $q) {
@@ -198,6 +182,7 @@ Beacon.controller('TrendingCtrl', function($scope, Events, $http, $q) {
   })
 });
 
+// Auth controller for eventual social integration
 // Beacon.controller('registerCtrl', function ($scope, $http, $auth) {
 // //   $scope.isSignedIn = function() {
 // //     console.log("Hello")
